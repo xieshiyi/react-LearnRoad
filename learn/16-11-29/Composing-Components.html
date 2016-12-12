@@ -1,0 +1,33 @@
+<!-- index.html -->
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Embedding</title>
+    <link rel="stylesheet" href="../shared/css/base.css" />
+    <script src="https://npmcdn.com/babel-core@5.8.38/browser.min.js"></script>
+  </head>
+  <body>
+    <div id="content"></div>
+    <script  src="../../build/react.js"></script>
+    <script  src="../../build/react-dom.js"></script>
+
+    <script type="text/babel">
+      function Welcome(props){
+        return <h1>Hello,{props.name}.</h1>
+      }
+      function App(){
+        return (
+        <div>
+          <Welcome name="Xieshiyi" />
+          <Welcome name="Linjun" />
+        </div>
+      )
+      }
+      ReactDOM.render(
+        <App />,
+        document.getElementById('content')
+      );
+    </script>
+  </body>
+</html>

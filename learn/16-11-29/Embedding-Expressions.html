@@ -1,0 +1,33 @@
+<!-- index.html -->
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Embedding</title>
+    <link rel="stylesheet" href="../shared/css/base.css" />
+    <script src="https://npmcdn.com/babel-core@5.8.38/browser.min.js"></script>
+  </head>
+  <body>
+    <div id="content"></div>
+    <script  src="../../build/react.js"></script>
+    <script  src="../../build/react-dom.js"></script>
+
+    <script type="text/babel">
+      function formatName(user){
+        return user.firstName+""+user.lastName;
+      }
+
+      const user={
+        firstName:'Xie',
+        lastName:'shiyi'
+      };
+      const element=(
+        <h1>Hello,{formatName(user)}</h1>
+      );
+      ReactDOM.render(
+        element,
+        document.getElementById('content')
+      );
+    </script>
+  </body>
+</html>

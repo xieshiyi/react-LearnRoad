@@ -1,0 +1,32 @@
+  Z<!-- index.html -->
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>更新所呈现的元素</title>
+    <link rel="stylesheet" href="../shared/css/base.css" />
+    <script src="https://npmcdn.com/babel-core@5.8.38/browser.min.js"></script>
+  </head>
+  <body>
+    <div id="content"></div>
+    <script  src="../../build/react.js"></script>
+    <script  src="../../build/react-dom.js"></script>
+
+    <script type="text/babel">
+      function tick(){
+        const element=(
+          <div>
+          <h1>Hellp ,World!</h1>
+          <h2>It is {new Date().toLocaleTimeString()}.</h2>
+          </div>
+        );
+        ReactDOM.render(
+          element,
+          document.getElementById('content')
+        );
+      }
+      setInterval(tick,1000);
+
+    </script>
+  </body>
+</html>

@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Clock</title>
+    <link rel="stylesheet" href="../shared/css/base.css" />
+    <script src="https://npmcdn.com/babel-core@5.8.38/browser.min.js"></script>
+</head>
+<body>
+
+
+    <div id="container"></div>
+
+    <script src="../../build/react.js"></script>
+    <script src="../../build/react-dom.js"></script>
+    <script type="text/babel">
+    //function Clock(props) {
+    //   return(
+    //           <div>
+    //              <h1>Hello,World!</h1>
+    //                <h2>It is {props.date.toLocaleTimeString()}.</h2>
+    //            </div>
+    //    );
+    //}
+    //function tick() {
+    //    ReactDOM.render(
+    //            <Clock date={new Date() } />,
+    //    document.getElementById('container')
+    //    );
+    //}
+    //setInterval(tick,1000);
+        class Clock extends React.Component {
+            //添加类构造函数来分配初始this.state：
+            constructor (props){
+                super(props);
+                this.state={date:new Date()};
+            }
+            //分量输出后挂机运行已经被渲染到了DOM,适合放置计时器
+
+            componentDidMount() {
+                this.timerID = setInterval(
+                        () => this.tick(),
+                        1000
+                );
+            }
+            //将推倒在计时器componentWillUnmount()的生命周期挂钩,清除定时器每当由产生的DOM Clock被删除
+
+            componentWillUnmount() {
+                clearInterval(this.timerID);
+            }
+
+            tick() {
+                this.setState({
+                    date: new Date()
+                });
+            }
+            render(){
+                return (
+                        <div>
+                            <h1>Hello,World!</h1>
+                            <h2>It is {this.state.date.toLocaleTimeString()}.</h2>
+                        </div>
+                );
+            }
+        }
+
+        ReactDOM.render(
+                <Clock />,
+                document.getElementById('container')
+        );
+
+
+    </script>
+</body>
+</html>
