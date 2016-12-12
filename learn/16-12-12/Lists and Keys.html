@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Lists and Keys</title>
+    <link rel="stylesheet" href="../shared/css/base.css" />
+    <script src="https://npmcdn.com/babel-core@5.8.38/browser.min.js"></script>
+</head>
+<body>
+<div id="container"></div>
+<div id="keys"></div>
+<div id="samekeys"></div>
+<script src="../../build/react.js"></script>
+<script src="../../build/react-dom.js"></script>
+<script type="text/babel">
+//    const numbers=[1,2,3,4,5];
+//    const listItem=numbers.map((number)=>
+//    <li>{number}</li>
+//    );
+//    ReactDOM.render(
+//            <ul>{listItem}</ul>,
+//            document.getElementById('container')
+//    );
+//列表
+function NumberList(props) {
+    const numbers = props.numbers;
+    const listItems = numbers.map((number) =>
+            <li key={number.toString()}>
+                {number}
+            </li>
+    );
+    return (
+            <ul>{listItems}</ul>
+    );
+}
+//Keys,Keys used within arrays should be unique among their siblings.However they don't need to be globally unique.(并不是全局唯一)
+//我们可以使用相同的key，当我们产生两种不同的阵列：
+function ListItem(props) {
+    // Correct! There is no need to specify the key here:
+    return <li>{props.value}</li>;
+}
+
+function NumberList2(props) {
+    const numbers = props.numbers;
+    const listItems = numbers.map((number) =>
+            // Correct! Key should be specified inside the array.
+            <ListItem key={number.toString()}
+                      value={number} />
+    );
+    return (
+            <ul>
+                {listItems}
+            </ul>
+    );
+}
+
+
+
+
+//相同的key
+function Blog(props) {
+    const sidebar = (
+            <ul>
+                {props.posts.map((post) =>
+                        <li key={post.id}>
+                            {post.title}
+                        </li>
+                )}
+            </ul>
+    );
+    const content = props.posts.map((post) =>
+            <div key={post.id}>
+                <h3>{post.title}</h3>
+                <p>{post.content}</p>
+            </div>
+    );
+    return (
+            <div>
+                {sidebar}
+                <hr />
+                {content}
+            </div>
+    );
+}
+
+const posts = [
+    {id: 1, title: 'Hello World', content: 'Welcome to learning React!'},
+    {id: 2, title: 'Installation', content: 'You can install React from npm.'}
+];
+
+const numbers = [1, 2, 3, 4, 5];
+ReactDOM.render(
+        <NumberList numbers={numbers} />,
+        document.getElementById('container')
+);
+
+ReactDOM.render(
+        <NumberList2 numbers={numbers} />,
+        document.getElementById('keys')
+);
+ReactDOM.render(
+        <Blog posts={posts} />,
+        document.getElementById('samekeys')
+);
+</script>
+</body>
+</html>
